@@ -2,7 +2,7 @@
 
 # 🐳 Conteneurisation – 
 Bachelor 3 Développeur Web 2024 / 2025  
-Auteur : **Arnold Morel Jabea
+Auteur : Arnold Morel Jabea
 
 Projet : deux services orchestrés par **Docker Compose**
 
