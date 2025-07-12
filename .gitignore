@@ -1,0 +1,7 @@
+# Env
+.env
+.env.*
+# Data
+data/
+# Dump
+dump.sql
