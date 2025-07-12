@@ -1,0 +1,50 @@
+# docker-compose.yml
+services:
+  # ────────── Base de données ──────────
+  database:
+    image: mysql:8           
+    restart: unless-stopped
+
+   
+    env_file:
+      - .env
+
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}        
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+    volumes:
+      - ./data:/var/lib/mysql         
+      - ./database/init.sql:/docker-entrypoint-initdb.d/01-init.sql
+
+    
+    ports:
+      - "4406:3306"
+
+  # ────────── Client PHP ──────────
+  client:
+    build:
+      context: ./client                
+    container_name: client
+    restart: unless-stopped
+    depends_on:
+      - database
+
+    env_file:
+      - .env                         
+
+    environment:
+      DB_HOST: database                   
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${MYSQL_USER}
+      DB_PASS: ${MYSQL_PASSWORD}
+      APP_ENV: ${APP_ENV:-dev}
+
+    
+    volumes:
+      - ./client/src:/var/www/html
+
+    ports:
+      - "8080:80"                         
