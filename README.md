@@ -1,7 +1,7 @@
 
 
-# 🐳 Conteneurisation – 
-Bachelor 3 Développeur Web 2024 / 2025  
+# 🐳 Conteneurisation 
+
 Auteur : Arnold Morel Jabea
 
 Projet : deux services orchestrés par **Docker Compose**
